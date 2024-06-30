@@ -1,15 +1,25 @@
 {
-  "name": "stock-master",
-  "version": "1.0.50",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "bun run --watch src/index.ts"
-  },
-  "dependencies": {
-    "elysia": "latest"
-  },
-  "devDependencies": {
-    "bun-types": "latest"
-  },
-  "module": "src/index.js"
+	"name": "stock-master",
+	"version": "1.0.50",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"dev": "bun run --watch src/index.ts",
+		"build": "bun build src/index.ts",
+		"start": "NODE_ENV=production bun src/index.ts",
+		"format": "bun prettier . --write",
+		"lint": "bun prettier . --check && eslint ."
+	},
+	"dependencies": {
+		"elysia": "latest"
+	},
+	"devDependencies": {
+		"@eslint/js": "^9.6.0",
+		"bun-types": "latest",
+		"eslint": "9.x",
+		"eslint-config-prettier": "^9.1.0",
+		"globals": "^15.6.0",
+		"prettier": "3.3.2",
+		"typescript-eslint": "^7.14.1"
+	},
+	"module": "src/index.js"
 }
