@@ -10,6 +10,8 @@
 		"lint": "bun prettier . --check && eslint ."
 	},
 	"dependencies": {
+		"@elysiajs/jwt": "^1.0.2",
+		"@elysiajs/swagger": "^1.0.5",
 		"elysia": "latest"
 	},
 	"devDependencies": {
