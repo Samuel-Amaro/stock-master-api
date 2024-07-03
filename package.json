@@ -13,7 +13,8 @@
 		"services:up": "docker compose -f compose.yaml up -d",
 		"services:stop": "docker compose -f compose.yaml stop",
 		"services:down": "docker compose -f compose.yaml down",
-		"wait-for-postgres": "bun src/scripts/wait-for-postgres.ts"
+		"wait-for-postgres": "bun src/scripts/wait-for-postgres.ts",
+		"seed": "bun run src/database/seed.ts"
 	},
 	"dependencies": {
 		"@elysiajs/jwt": "^1.0.2",
