@@ -7,16 +7,25 @@
 		"build": "bun build src/index.ts",
 		"start": "NODE_ENV=production bun src/index.ts",
 		"format": "bun prettier . --write",
-		"lint": "bun prettier . --check && eslint ."
+		"lint": "bun prettier . --check && eslint .",
+		"migration:create": "bun drizzle-kit generate",
+		"migration:up": "bun src/database/migrate.ts",
+		"services:up": "docker compose -f compose.yaml up -d",
+		"services:stop": "docker compose -f compose.yaml stop",
+		"services:down": "docker compose -f compose.yaml down"
 	},
 	"dependencies": {
 		"@elysiajs/jwt": "^1.0.2",
 		"@elysiajs/swagger": "^1.0.5",
-		"elysia": "latest"
+		"drizzle-orm": "^0.31.2",
+		"elysia": "latest",
+		"pg": "^8.12.0"
 	},
 	"devDependencies": {
 		"@eslint/js": "^9.6.0",
+		"@types/pg": "^8.11.6",
 		"bun-types": "latest",
+		"drizzle-kit": "^0.22.8",
 		"eslint": "9.x",
 		"eslint-config-prettier": "^9.1.0",
 		"globals": "^15.6.0",
