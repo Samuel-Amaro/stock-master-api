@@ -1,36 +1,36 @@
-import { db } from "./connection"
-import { category, inventoryMovement, product, supplier, user } from "./schema"
+import { db } from './connection'
+import { category, inventoryMovement, product, supplier, user } from './schema'
 
 const users = [
 	{
 		name: 'Amber Howard',
 		email: 'scottmichael@hotmail.com',
-		password:
-			'$argon2id$v=19$m=65536,t=3,p=4$Kir8KT9IBojCvdmh+f8JeQ$sltMq7SbryZR/V+7GlOUzay0CixDVkxCJLKdkKrVUHA'
+		hash: '$argon2id$v=19$m=65536,t=2,p=1$6TC4P2/5NpWqsqAKXJ9Y2+8llNU4vwyZ0Keo0blCkzU$7rlevGjvBg7hNwHfTv+rGX84sIVN80nJ40B+ipeqX3Y',
+		password: 'A1b@2c3d'
 	},
 	{
 		name: 'Matthew Miller',
 		email: 'urhodes@gmail.com',
-		password:
-			'$argon2id$v=19$m=65536,t=3,p=4$xKsuqI9uNTZjNSKT8NdlPw$LS3AkBmTsBeUY1yAltPf1CY4NbOwAjVoLXKNqIsDAwM'
+		hash: '$argon2id$v=19$m=65536,t=2,p=1$aXfyuB91R4TmPScR5DauuHgKODq+CwTk5YkPCxt6lnk$DLPTpKX0yog5p+JOfvadluD86a3jF/2BXgopN/5RRQc',
+		password: 'X9y!8w7v'
 	},
 	{
 		name: 'Christopher Dunn',
 		email: 'williamsamy@gmail.com',
-		password:
-			'$argon2id$v=19$m=65536,t=3,p=4$yQ2o9VDkw01j0lK2IPUM8A$ulhUc1wJqtdvPvaVjUBHAYqabICiwKdFFdB6h72G+/8'
+		hash: '$argon2id$v=19$m=65536,t=2,p=1$z0fvmY7wDJKZmf0Gv6YPrEnqQQ2X1uy6HifRj7WLI2s$O5lIhuyxUkYJSKEDhmj1YTilnuktybQsZM/y/NdfuCk',
+		password: 'P0q$4t6u'
 	},
 	{
 		name: 'Tammy Carroll',
 		email: 'frankmary@yahoo.com',
-		password:
-			'$argon2id$v=19$m=65536,t=3,p=4$/xqgXNN0y2XjgIWDjfMVOg$noalToC4QUq2NNxPs27sDHtyPrNa0ss7gFWidrlo2TQ'
+		hash: '$argon2id$v=19$m=65536,t=2,p=1$B+u7V4Jj7gGSTeTtKVKknR4JIZcUBg3PlMhFBwVzr3s$bNsHI70N0MmXUGXTH6ov86hyx1PvU0ajemsL5fv8KUc',
+		password: 'M3n*5o1l'
 	},
 	{
 		name: 'Scott Benjamin',
 		email: 'ruthford@munoz-bowen.biz',
-		password:
-			'$argon2id$v=19$m=65536,t=3,p=4$p0EolkF4FgEHHYcvuI85EQ$xtPuuGqTeH8mQ/ET7qeDsGdDhTQrM2y8TfMu7KbSTbc'
+		hash: '$argon2id$v=19$m=65536,t=2,p=1$uVEd2oU5OW4Q7wtpq0namJTBAqGZVKTvUKb3UouXYXo$Xau4FvB+xNyBq4qAlA8mA8hgTlgm1qth5R3beielfC0',
+		password: 'B8r%7s2j'
 	}
 ]
 
@@ -142,7 +142,7 @@ const suppliers = [
 		cep: '20090-004',
 		cnpj: '56.789.012/0001-44',
 		country: 'Brasil',
-		phone: '(21) 99876-5432'
+		phone: '(21) 99876-5567'
 	},
 	{
 		name: 'Ferramentas Pro LTDA',
@@ -191,24 +191,24 @@ const suppliers = [
 ]
 
 const products = [
-	{ name: 'Smartphone', price: 1299.99, quantity: 50, idCategory: 1, idSuppliers: 1 },
-	{ name: 'Camisa', price: 49.99, quantity: 200, idCategory: 2, idSuppliers: 2 },
-	{ name: 'Arroz', price: 5.99, quantity: 1000, idCategory: 3, idSuppliers: 3 },
-	{ name: 'Sofá', price: 799.99, quantity: 20, idCategory: 4, idSuppliers: 4 },
-	{ name: 'Boneca', price: 59.99, quantity: 150, idCategory: 5, idSuppliers: 5 },
-	{ name: 'Livro de Ficção', price: 29.99, quantity: 300, idCategory: 6, idSuppliers: 6 },
-	{ name: 'Martelo', price: 19.99, quantity: 500, idCategory: 7, idSuppliers: 7 },
-	{ name: 'Shampoo', price: 12.99, quantity: 800, idCategory: 8, idSuppliers: 8 },
-	{ name: 'Bola de Futebol', price: 49.99, quantity: 100, idCategory: 9, idSuppliers: 9 },
-	{ name: 'Pneu', price: 299.99, quantity: 60, idCategory: 10, idSuppliers: 10 }
+	{ name: 'Smartphone', price: '1299.99', quantity: 50, idCategory: 1, idSuppliers: 1 },
+	{ name: 'Camisa', price: '49.99', quantity: 200, idCategory: 2, idSuppliers: 2 },
+	{ name: 'Arroz', price: '5.99', quantity: 1000, idCategory: 3, idSuppliers: 3 },
+	{ name: 'Sofá', price: '799.99', quantity: 20, idCategory: 4, idSuppliers: 4 },
+	{ name: 'Boneca', price: '59.99', quantity: 150, idCategory: 5, idSuppliers: 5 },
+	{ name: 'Livro de Ficção', price: '29.99', quantity: 300, idCategory: 6, idSuppliers: 6 },
+	{ name: 'Martelo', price: '19.99', quantity: 500, idCategory: 7, idSuppliers: 7 },
+	{ name: 'Shampoo', price: '12.99', quantity: 800, idCategory: 8, idSuppliers: 8 },
+	{ name: 'Bola de Futebol', price: '49.99', quantity: 100, idCategory: 9, idSuppliers: 9 },
+	{ name: 'Pneu', price: '299.99', quantity: 60, idCategory: 10, idSuppliers: 10 }
 ]
 
 const inventoryMovements: {
-  idProduct: number;
-  idUser: number;
-  quantity: number;
-  type: 'entry' | 'exit';
-  description: string
+	idProduct: number
+	idUser: number
+	quantity: number
+	type: 'entry' | 'exit'
+	description: string
 }[] = [
 	{
 		idProduct: 1,
@@ -356,26 +356,28 @@ const inventoryMovements: {
  * RESET DATABASE
  */
 
-await db.delete(user);
-await db.delete(category);
-await db.delete(product);
-await db.delete(inventoryMovement);
-await db.delete(supplier);
+await db.delete(user)
+await db.delete(category)
+await db.delete(product)
+await db.delete(inventoryMovement)
+await db.delete(supplier)
 
-console.log("✔ Database reset");
+console.log('✔ Database reset')
 
 /**
  *  CREATE
-*/
+ */
 
-await db.insert(user).values(users);
-console.log("✔ Created users");
-await db.insert(category).values(categorys);
-console.log("✔ Created categorys");
-await db.insert(supplier).values(suppliers);
-console.log("✔ Created suppliers");
-await db.insert(product).values(products);
-console.log("✔ Created products");
-await db.insert(inventoryMovement).values(inventoryMovements);
+await db
+	.insert(user)
+	.values(users.map((pass) => ({ email: pass.email, name: pass.name, password: pass.hash })))
+console.log('✔ Created users')
+await db.insert(category).values(categorys)
+console.log('✔ Created categorys')
+await db.insert(supplier).values(suppliers)
+console.log('✔ Created suppliers')
+await db.insert(product).values(products)
+console.log('✔ Created products')
+await db.insert(inventoryMovement).values(inventoryMovements)
 
-console.log("Database seeded successfully!");
+console.log('Database seeded successfully!')
