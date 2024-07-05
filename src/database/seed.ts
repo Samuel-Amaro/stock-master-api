@@ -31,7 +31,7 @@ const users: {
 		email: 'williamsamy@gmail.com',
 		hash: '$argon2id$v=19$m=65536,t=2,p=1$z0fvmY7wDJKZmf0Gv6YPrEnqQQ2X1uy6HifRj7WLI2s$O5lIhuyxUkYJSKEDhmj1YTilnuktybQsZM/y/NdfuCk',
 		password: 'P0q$4t6u',
-		role: Role.employee,
+		role: Role.admin,
 		idUser: 1
 	},
 	{
