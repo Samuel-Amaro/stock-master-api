@@ -21,7 +21,7 @@ export const authenticate = new Elysia()
 				return error('Conflict', 'Credenciais inválidas')
 			}
 
-			auth.value = await jwt.sign({ sub: userExists.id.toString(), role: 'employee' })
+			auth.value = await jwt.sign({ sub: userExists.id.toString(), role: userExists.role })
 			auth.maxAge = 1 * 86400
 			auth.path = '/'
 		},
@@ -29,11 +29,10 @@ export const authenticate = new Elysia()
 	)
 
 export const signOut = new Elysia().use(AuthDTO).post(
-  '/sign-out',
-  async ({ cookie, cookie: { auth }, }) => {
-    auth.remove();
-    delete cookie.auth;
-  },
-  { cookie: 'auth.cookie' }
+	'/sign-out',
+	async ({ cookie, cookie: { auth } }) => {
+		auth.remove()
+		delete cookie.auth
+	},
+	{ cookie: 'auth.cookie' }
 )
-  
