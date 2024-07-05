@@ -1,36 +1,54 @@
+import { Role } from '../types'
 import { db } from './connection'
 import { category, inventoryMovement, product, supplier, user } from './schema'
 
-const users = [
+const users: {
+	name: string
+	email: string
+	hash: string
+	password: string
+	role: Role
+	idUser: number | null
+}[] = [
 	{
 		name: 'Amber Howard',
 		email: 'scottmichael@hotmail.com',
 		hash: '$argon2id$v=19$m=65536,t=2,p=1$6TC4P2/5NpWqsqAKXJ9Y2+8llNU4vwyZ0Keo0blCkzU$7rlevGjvBg7hNwHfTv+rGX84sIVN80nJ40B+ipeqX3Y',
-		password: 'A1b@2c3d'
+		password: 'A1b@2c3d',
+		role: Role.admin,
+		idUser: null
 	},
 	{
 		name: 'Matthew Miller',
 		email: 'urhodes@gmail.com',
 		hash: '$argon2id$v=19$m=65536,t=2,p=1$aXfyuB91R4TmPScR5DauuHgKODq+CwTk5YkPCxt6lnk$DLPTpKX0yog5p+JOfvadluD86a3jF/2BXgopN/5RRQc',
-		password: 'X9y!8w7v'
+		password: 'X9y!8w7v',
+		role: Role.admin,
+		idUser: 1
 	},
 	{
 		name: 'Christopher Dunn',
 		email: 'williamsamy@gmail.com',
 		hash: '$argon2id$v=19$m=65536,t=2,p=1$z0fvmY7wDJKZmf0Gv6YPrEnqQQ2X1uy6HifRj7WLI2s$O5lIhuyxUkYJSKEDhmj1YTilnuktybQsZM/y/NdfuCk',
-		password: 'P0q$4t6u'
+		password: 'P0q$4t6u',
+		role: Role.employee,
+		idUser: 1
 	},
 	{
 		name: 'Tammy Carroll',
 		email: 'frankmary@yahoo.com',
 		hash: '$argon2id$v=19$m=65536,t=2,p=1$B+u7V4Jj7gGSTeTtKVKknR4JIZcUBg3PlMhFBwVzr3s$bNsHI70N0MmXUGXTH6ov86hyx1PvU0ajemsL5fv8KUc',
-		password: 'M3n*5o1l'
+		password: 'M3n*5o1l',
+		role: Role.employee,
+		idUser: 1
 	},
 	{
 		name: 'Scott Benjamin',
 		email: 'ruthford@munoz-bowen.biz',
 		hash: '$argon2id$v=19$m=65536,t=2,p=1$uVEd2oU5OW4Q7wtpq0namJTBAqGZVKTvUKb3UouXYXo$Xau4FvB+xNyBq4qAlA8mA8hgTlgm1qth5R3beielfC0',
-		password: 'B8r%7s2j'
+		password: 'B8r%7s2j',
+		role: Role.employee,
+		idUser: 1
 	}
 ]
 
@@ -368,9 +386,15 @@ console.log('✔ Database reset')
  *  CREATE
  */
 
-await db
-	.insert(user)
-	.values(users.map((pass) => ({ email: pass.email, name: pass.name, password: pass.hash })))
+await db.insert(user).values(
+	users.map((pass) => ({
+		email: pass.email,
+		name: pass.name,
+		password: pass.hash,
+		role: pass.role,
+		idAdmin: pass.idUser
+	}))
+)
 console.log('✔ Created users')
 await db.insert(category).values(categorys)
 console.log('✔ Created categorys')
