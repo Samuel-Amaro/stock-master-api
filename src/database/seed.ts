@@ -23,7 +23,7 @@ const users: {
 		email: 'urhodes@gmail.com',
 		hash: '$argon2id$v=19$m=65536,t=2,p=1$aXfyuB91R4TmPScR5DauuHgKODq+CwTk5YkPCxt6lnk$DLPTpKX0yog5p+JOfvadluD86a3jF/2BXgopN/5RRQc',
 		password: 'X9y!8w7v',
-		role: Role.admin,
+		role: Role.employee,
 		idUser: 1
 	},
 	{
@@ -31,7 +31,7 @@ const users: {
 		email: 'williamsamy@gmail.com',
 		hash: '$argon2id$v=19$m=65536,t=2,p=1$z0fvmY7wDJKZmf0Gv6YPrEnqQQ2X1uy6HifRj7WLI2s$O5lIhuyxUkYJSKEDhmj1YTilnuktybQsZM/y/NdfuCk',
 		password: 'P0q$4t6u',
-		role: Role.admin,
+		role: Role.employee,
 		idUser: 1
 	},
 	{
