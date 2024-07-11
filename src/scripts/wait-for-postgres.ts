@@ -1,8 +1,9 @@
 import { $ } from 'bun'
 
 async function checkPostgres() {
-	const { stdout, exitCode } =
-		await $`docker exec postgres-dev pg_isready --host localhost`.nothrow().quiet()
+	const { stdout, exitCode } = await $`docker exec postgres-dev pg_isready --host localhost`
+		.nothrow()
+		.quiet()
 	const output = await new Response(stdout).text()
 
 	if (exitCode !== 0) {
