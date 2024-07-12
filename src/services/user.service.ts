@@ -18,10 +18,53 @@ export abstract class UserService {
 		})
 	}
 
-	static async findById(id: number) {
-		return await db.query.user.findFirst({
+	static async findById(id: number): Promise<
+		| {
+				id: number
+				name: string
+				password: string
+				email: string
+				role: 'employee' | 'admin'
+				nameAdmin: string | null
+				createdAt: Date
+				updatedAt: Date
+		  }
+		| undefined
+	> {
+		const userFound = await db.query.user.findFirst({
 			where: eq(user.id, id)
 		})
+
+		if (userFound && userFound.idAdmin) {
+			const admin = await db.query.user.findFirst({
+				where: eq(user.id, userFound.id)
+			})
+			return {
+				id: userFound.id,
+				name: userFound.name,
+				password: userFound.password,
+				email: userFound.email,
+				role: userFound.role,
+				nameAdmin: admin?.name ? admin.name : null,
+				createdAt: userFound.createdAt,
+				updatedAt: userFound.updatedAt
+			}
+		}
+
+		const result = userFound
+			? {
+					id: userFound.id,
+					name: userFound.name,
+					password: userFound.password,
+					email: userFound.email,
+					role: userFound.role,
+					nameAdmin: null,
+					createdAt: userFound.createdAt,
+					updatedAt: userFound.updatedAt
+				}
+			: undefined
+
+		return result
 	}
 
 	static async create(values: {

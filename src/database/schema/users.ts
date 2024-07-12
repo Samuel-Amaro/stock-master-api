@@ -22,8 +22,8 @@ export const user = pgTable(
 		email: text('email').notNull().unique(),
 		role: userRoleEnum('role').default('employee').notNull(),
 		idAdmin: integer('idUser'),
-		createdAt: timestamp('created_at').defaultNow(),
-		updatedAt: timestamp('updated_at').defaultNow()
+		createdAt: timestamp('created_at').notNull().defaultNow(),
+		updatedAt: timestamp('updated_at').notNull().defaultNow()
 	},
 	(table) => {
 		return {

@@ -96,8 +96,8 @@ export const userRoutes = new Elysia()
 		'/user',
 		async ({ body, error, cookie, cookie: { auth }, getCurrentUser }) => {
 			const payload = await getCurrentUser()
-      
-      const valuesToUpdate = ServiceUtils.partialBody<PartialUser, typeof body>(body)
+
+			const valuesToUpdate = ServiceUtils.partialBody<PartialUser, typeof body>(body)
 
 			if (!ServiceUtils.hasKeys(valuesToUpdate)) {
 				return error('Bad Request', 'Solicitação com body inválido')
