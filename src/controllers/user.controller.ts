@@ -50,6 +50,7 @@ export const userRoutes = new Elysia()
 		{
 			async beforeHandle({ headers, error }) {
 				const role = headers.role as string
+        console.log(role)
 
 				if (role !== Role.admin) {
 					return error('Forbidden', 'Você não tem permissão para acessar este enpoint')
@@ -81,17 +82,29 @@ export const userRoutes = new Elysia()
 			query: 'queryPagination'
 		}
 	)
-	.get('/user', async ({ error, getCurrentUser }) => {
-		const payload = await getCurrentUser()
+	.get(
+		'/user',
+		async ({ error, getCurrentUser }) => {
+			const payload = await getCurrentUser()
 
-		const user = await UserService.findById(parseInt(payload.sub))
+			const user = await UserService.findById(parseInt(payload.sub))
 
-		if (!user) {
-			return error('Not Found', 'Id inválido')
+			if (!user) {
+				return error('Not Found', 'Id inválido')
+			}
+
+			return user
+		},
+		{
+			async beforeHandle({ headers, error }) {
+				const role = headers.role as string
+
+				if (role !== Role.admin) {
+					return error('Forbidden', 'Você não tem permissão para acessar este enpoint')
+				}
+			}
 		}
-
-		return user
-	})
+	)
 	.put(
 		'/user',
 		async ({ body, error, cookie, cookie: { auth }, getCurrentUser }) => {
@@ -133,27 +146,46 @@ export const userRoutes = new Elysia()
 			})
 		},
 		{
-			body: 'update'
+			body: 'update',
+			async beforeHandle({ headers, error }) {
+				const role = headers.role as string
+
+				if (role !== Role.admin) {
+					return error('Forbidden', 'Você não tem permissão para acessar este enpoint')
+				}
+			}
 		}
 	)
-	.delete('/user', async ({ getCurrentUser, error, cookie, cookie: { auth } }) => {
-		const payload = await getCurrentUser()
+	.delete(
+		'/user',
+		async ({ getCurrentUser, error, cookie, cookie: { auth } }) => {
+			const payload = await getCurrentUser()
 
-		const user = await UserService.findById(parseInt(payload.sub))
+			const user = await UserService.findById(parseInt(payload.sub))
 
-		if (!user) {
-			return error('Not Found', 'Id inválido')
+			if (!user) {
+				return error('Not Found', 'Id inválido')
+			}
+
+			const result = await UserService.delete(user.id)
+
+			auth.remove()
+			delete cookie.auth
+
+			return new Response(`Usuário com id: ${result.deletedId} excluido com sucesso!`, {
+				status: 200
+			})
+		},
+		{
+			async beforeHandle({ headers, error }) {
+				const role = headers.role as string
+
+				if (role !== Role.admin) {
+					return error('Forbidden', 'Você não tem permissão para acessar este enpoint')
+				}
+			}
 		}
-
-		const result = await UserService.delete(user.id)
-
-		auth.remove()
-		delete cookie.auth
-
-		return new Response(`Usuário com id: ${result.deletedId} excluido com sucesso!`, {
-			status: 200
-		})
-	})
+	)
 	.delete(
 		'/user/batch-delete',
 		async ({ body }) => {
