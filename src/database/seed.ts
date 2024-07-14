@@ -55,53 +55,43 @@ const users: {
 const categorys = [
 	{
 		name: 'Eletrônicos',
-		description: 'Aparelhos e dispositivos eletrônicos diversos.',
-		idUser: 1
+		description: 'Aparelhos e dispositivos eletrônicos diversos.'
 	},
 	{
 		name: 'Roupas',
-		description: 'Vestimentas e acessórios de moda.',
-		idUser: 1
+		description: 'Vestimentas e acessórios de moda.'
 	},
 	{
 		name: 'Alimentos',
-		description: 'Produtos alimentícios e bebidas.',
-		idUser: 1
+		description: 'Produtos alimentícios e bebidas.'
 	},
 	{
 		name: 'Móveis',
-		description: 'Móveis e artigos para casa.',
-		idUser: 1
+		description: 'Móveis e artigos para casa.'
 	},
 	{
 		name: 'Brinquedos',
-		description: 'Jogos e brinquedos para todas as idades.',
-		idUser: 1
+		description: 'Jogos e brinquedos para todas as idades.'
 	},
 	{
 		name: 'Livros',
-		description: 'Literatura, didáticos e outros gêneros.',
-		idUser: 1
+		description: 'Literatura, didáticos e outros gêneros.'
 	},
 	{
 		name: 'Ferramentas',
-		description: 'Ferramentas e equipamentos para construção.',
-		idUser: 1
+		description: 'Ferramentas e equipamentos para construção.'
 	},
 	{
 		name: 'Beleza',
-		description: 'Produtos de beleza e cuidados pessoais.',
-		idUser: 1
+		description: 'Produtos de beleza e cuidados pessoais.'
 	},
 	{
 		name: 'Esportes',
-		description: 'Artigos esportivos e de fitness.',
-		idUser: 1
+		description: 'Artigos esportivos e de fitness.'
 	},
 	{
 		name: 'Automotivo',
-		description: 'Acessórios e peças para veículos.',
-		idUser: 1
+		description: 'Acessórios e peças para veículos.'
 	}
 ]
 
