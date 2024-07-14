@@ -2,6 +2,7 @@ import Elysia from 'elysia'
 import { CategoryDto } from '../models/category.model'
 import { CategoryService } from '../services/category.service'
 import { ServiceUtils } from '../services/utils.service'
+import { Role } from '../types'
 
 export const categoryRoutes = new Elysia()
 	.use(CategoryDto)
@@ -22,7 +23,14 @@ export const categoryRoutes = new Elysia()
 			return `Categoria: ${body.name} criada com sucesso!`
 		},
 		{
-			body: 'register.category'
+			body: 'register.category',
+      async beforeHandle({ headers, error }) {
+				const role = headers.role as string
+
+				if (role !== Role.admin) {
+					return error('Forbidden', 'Você não tem permissão para acessar este enpoint')
+				}
+			}
 		}
 	)
 	.get(
@@ -75,7 +83,14 @@ export const categoryRoutes = new Elysia()
 		},
 		{
 			body: 'update.category',
-			params: 'params.category'
+			params: 'params.category',
+      async beforeHandle({ headers, error }) {
+				const role = headers.role as string
+
+				if (role !== Role.admin) {
+					return error('Forbidden', 'Você não tem permissão para acessar este enpoint')
+				}
+			}
 		}
 	)
 	.delete(
@@ -94,6 +109,13 @@ export const categoryRoutes = new Elysia()
 			})
 		},
 		{
-			params: 'params.category'
+			params: 'params.category',
+      async beforeHandle({ headers, error }) {
+				const role = headers.role as string
+
+				if (role !== Role.admin) {
+					return error('Forbidden', 'Você não tem permissão para acessar este enpoint')
+				}
+			}
 		}
 	)
