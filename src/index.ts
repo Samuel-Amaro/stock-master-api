@@ -5,6 +5,7 @@ import { jwtPlugin } from './setup'
 import { TokenPayload } from './types'
 import { userRoutes } from './controllers/user.controller'
 import { categoryRoutes } from './controllers/category.controller'
+import { supplierRoutes } from './controllers/suppliers.controller'
 
 const app = new Elysia({ prefix: '/api/v1' })
 	.use(
@@ -43,7 +44,9 @@ const app = new Elysia({ prefix: '/api/v1' })
 				}
 			}
 		},
-		(app) => (app.use(signOut), app.use(userRoutes), app.use(categoryRoutes))
+		(app) => (
+			app.use(signOut), app.use(userRoutes), app.use(categoryRoutes), app.use(supplierRoutes)
+		)
 	)
 	.listen(3000)
 

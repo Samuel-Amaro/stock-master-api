@@ -12,9 +12,8 @@ export const supplier = pgTable('supplier', {
 	city: text('city'),
 	state: text('state'),
 	cep: text('cep').unique(),
-	country: text('contry'),
-	createdAt: timestamp('created_at').defaultNow(),
-	updatedAt: timestamp('updated_at').defaultNow()
+	createdAt: timestamp('created_at').notNull().defaultNow(),
+	updatedAt: timestamp('updated_at').notNull().defaultNow()
 })
 
 export const supplierRelations = relations(supplier, ({ many }) => ({
