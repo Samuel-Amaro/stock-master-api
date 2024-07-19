@@ -50,7 +50,6 @@ export const userRoutes = new Elysia()
 		{
 			async beforeHandle({ headers, error }) {
 				const role = headers.role as string
-        console.log(role)
 
 				if (role !== Role.admin) {
 					return error('Forbidden', 'Você não tem permissão para acessar este enpoint')
@@ -194,8 +193,6 @@ export const userRoutes = new Elysia()
 					return UserService.findById(userId)
 				})
 			)
-
-			console.log(usersExists)
 
 			const deletedUserIds = await Promise.all(
 				usersExists.map((user) => {
