@@ -49,7 +49,7 @@ export const categoryRoutes = new Elysia()
 		}
 	)
 	.get(
-		'/category/all',
+		'/category',
 		async ({ query }) => {
 			return await CategoryService.getAll(query.page, query.pageSize, query.order)
 		},
