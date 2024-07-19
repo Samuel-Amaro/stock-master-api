@@ -24,7 +24,7 @@ export const categoryRoutes = new Elysia()
 		},
 		{
 			body: 'register.category',
-      async beforeHandle({ headers, error }) {
+			async beforeHandle({ headers, error }) {
 				const role = headers.role as string
 
 				if (role !== Role.admin) {
@@ -84,7 +84,7 @@ export const categoryRoutes = new Elysia()
 		{
 			body: 'update.category',
 			params: 'params.category',
-      async beforeHandle({ headers, error }) {
+			async beforeHandle({ headers, error }) {
 				const role = headers.role as string
 
 				if (role !== Role.admin) {
@@ -110,7 +110,7 @@ export const categoryRoutes = new Elysia()
 		},
 		{
 			params: 'params.category',
-      async beforeHandle({ headers, error }) {
+			async beforeHandle({ headers, error }) {
 				const role = headers.role as string
 
 				if (role !== Role.admin) {
