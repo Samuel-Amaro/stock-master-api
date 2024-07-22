@@ -6,6 +6,7 @@ import { TokenPayload } from './types'
 import { userRoutes } from './controllers/user.controller'
 import { categoryRoutes } from './controllers/category.controller'
 import { supplierRoutes } from './controllers/suppliers.controller'
+import { productRoutes } from './controllers/product.controller'
 
 const app = new Elysia({ prefix: '/api/v1' })
 	.use(
@@ -45,7 +46,11 @@ const app = new Elysia({ prefix: '/api/v1' })
 			}
 		},
 		(app) => (
-			app.use(signOut), app.use(userRoutes), app.use(categoryRoutes), app.use(supplierRoutes)
+			app.use(signOut),
+			app.use(userRoutes),
+			app.use(categoryRoutes),
+			app.use(supplierRoutes),
+			app.use(productRoutes)
 		)
 	)
 	.listen(3000)
