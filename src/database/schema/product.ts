@@ -12,12 +12,12 @@ export const product = pgTable('product', {
 	quantity: integer('quantity').notNull(),
 	idCategory: integer('idCategory').references(() => category.id, {
 		onDelete: 'cascade'
-	}),
+	}).notNull(),
 	idSuppliers: integer('idSuppliers').references(() => supplier.id, {
 		onDelete: 'cascade'
-	}),
-	createdAt: timestamp('created_at').defaultNow(),
-	updatedAt: timestamp('updated_at').defaultNow()
+	}).notNull(),
+	createdAt: timestamp('created_at').defaultNow().notNull(),
+	updatedAt: timestamp('updated_at').defaultNow().notNull()
 })
 
 export const productRelations = relations(product, ({ one, many }) => ({
