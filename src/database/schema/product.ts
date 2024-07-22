@@ -10,12 +10,16 @@ export const product = pgTable('product', {
 	description: text('description'),
 	price: numeric('price', { precision: 7, scale: 2 }).notNull(),
 	quantity: integer('quantity').notNull(),
-	idCategory: integer('idCategory').references(() => category.id, {
-		onDelete: 'cascade'
-	}).notNull(),
-	idSuppliers: integer('idSuppliers').references(() => supplier.id, {
-		onDelete: 'cascade'
-	}).notNull(),
+	idCategory: integer('idCategory')
+		.references(() => category.id, {
+			onDelete: 'cascade'
+		})
+		.notNull(),
+	idSuppliers: integer('idSuppliers')
+		.references(() => supplier.id, {
+			onDelete: 'cascade'
+		})
+		.notNull(),
 	createdAt: timestamp('created_at').defaultNow().notNull(),
 	updatedAt: timestamp('updated_at').defaultNow().notNull()
 })
