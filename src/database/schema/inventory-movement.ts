@@ -7,13 +7,17 @@ export const movementTypeEnum = pgEnum('movement_type', ['entry', 'exit'])
 
 export const inventoryMovement = pgTable('inventory_movement', {
 	id: serial('id').primaryKey(),
-	idProduct: integer('idProduct').references(() => product.id, { onDelete: 'cascade' }),
-	idUser: integer('idUser').references(() => user.id, { onDelete: 'cascade' }),
+	idProduct: integer('idProduct')
+		.references(() => product.id, { onDelete: 'cascade' })
+		.notNull(),
+	idUser: integer('idUser')
+		.references(() => user.id, { onDelete: 'cascade' })
+		.notNull(),
 	quantity: integer('quantity').notNull(),
 	type: movementTypeEnum('type').notNull(),
 	description: text('description'),
-	createdAt: timestamp('created_at').defaultNow(),
-	updatedAt: timestamp('updated_at').defaultNow()
+	createdAt: timestamp('created_at').defaultNow().notNull(),
+	updatedAt: timestamp('updated_at').defaultNow().notNull()
 })
 
 export const inventoryMovementRelations = relations(inventoryMovement, ({ one }) => ({
