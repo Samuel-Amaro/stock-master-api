@@ -7,10 +7,10 @@ export const movementTypeEnum = pgEnum('movement_type', ['entry', 'exit'])
 
 export const inventoryMovement = pgTable('inventory_movement', {
 	id: serial('id').primaryKey(),
-	idProduct: integer('idProduct')
+	idProduct: integer('id_product')
 		.references(() => product.id, { onDelete: 'cascade' })
 		.notNull(),
-	idUser: integer('idUser')
+	idUser: integer('id_user')
 		.references(() => user.id, { onDelete: 'cascade' })
 		.notNull(),
 	quantity: integer('quantity').notNull(),

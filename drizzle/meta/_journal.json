@@ -57,6 +57,13 @@
 			"when": 1721674062044,
 			"tag": "0007_slimy_tyger_tiger",
 			"breakpoints": true
+		},
+		{
+			"idx": 8,
+			"version": "7",
+			"when": 1721829485071,
+			"tag": "0008_tranquil_doctor_doom",
+			"breakpoints": true
 		}
 	]
 }
