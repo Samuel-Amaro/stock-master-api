@@ -231,21 +231,21 @@ const inventoryMovements: {
 	{
 		idProduct: 1,
 		idUser: 1,
-		quantity: 30,
+		quantity: 50,
 		type: 'entry',
 		description: 'Entrada de novos smartphones para estoque.'
 	},
 	{
 		idProduct: 2,
 		idUser: 2,
-		quantity: 50,
-		type: 'exit',
+		quantity: 200,
+		type: 'entry',
 		description: 'Saída de camisas para venda em loja física.'
 	},
 	{
 		idProduct: 3,
 		idUser: 3,
-		quantity: 200,
+		quantity: 1000,
 		type: 'entry',
 		description: 'Recebimento de novo lote de arroz.'
 	},
@@ -259,7 +259,7 @@ const inventoryMovements: {
 	{
 		idProduct: 5,
 		idUser: 1,
-		quantity: 100,
+		quantity: 150,
 		type: 'entry',
 		description: 'Chegada de nova remessa de bonecas.'
 	},
@@ -274,7 +274,7 @@ const inventoryMovements: {
 		idProduct: 7,
 		idUser: 3,
 		quantity: 200,
-		type: 'entry',
+		type: 'exit',
 		description: 'Estoque de novos martelos para construção.'
 	},
 	{
@@ -287,7 +287,7 @@ const inventoryMovements: {
 	{
 		idProduct: 9,
 		idUser: 1,
-		quantity: 60,
+		quantity: 100,
 		type: 'entry',
 		description: 'Recebimento de bolas de futebol para o estoque.'
 	},
@@ -301,8 +301,8 @@ const inventoryMovements: {
 	{
 		idProduct: 3,
 		idUser: 2,
-		quantity: 50,
-		type: 'entry',
+		quantity: 150,
+		type: 'exit',
 		description: 'Reabastecimento de arroz.'
 	},
 	{
@@ -315,7 +315,7 @@ const inventoryMovements: {
 	{
 		idProduct: 7,
 		idUser: 4,
-		quantity: 100,
+		quantity: 500,
 		type: 'entry',
 		description: 'Estoque de martelos para promoção.'
 	},
@@ -329,28 +329,28 @@ const inventoryMovements: {
 	{
 		idProduct: 4,
 		idUser: 1,
-		quantity: 10,
+		quantity: 20,
 		type: 'entry',
 		description: 'Entrada de novos sofás no estoque.'
 	},
 	{
 		idProduct: 6,
 		idUser: 1,
-		quantity: 70,
+		quantity: 300,
 		type: 'entry',
 		description: 'Entrada de novos livros de ficção no estoque.'
 	},
 	{
 		idProduct: 8,
 		idUser: 2,
-		quantity: 100,
+		quantity: 800,
 		type: 'entry',
 		description: 'Entrada de novos shampoos no estoque.'
 	},
 	{
 		idProduct: 10,
 		idUser: 3,
-		quantity: 5,
+		quantity: 60,
 		type: 'entry',
 		description: 'Entrada de novos pneus no estoque.'
 	},
