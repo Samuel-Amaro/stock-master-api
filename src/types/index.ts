@@ -25,3 +25,15 @@ export type PartialUserBatch = {
 	password: string
 	id: number
 }
+
+export enum MovementType {
+	entry = 'entry',
+	exit = 'exit'
+}
+
+export enum SearchFilterDate {
+	year = 'year',
+	day = 'day',
+	month = 'month',
+	full = 'full'
+}
