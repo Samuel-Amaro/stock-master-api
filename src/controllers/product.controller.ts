@@ -1,16 +1,33 @@
 import Elysia from 'elysia'
 import { productDto } from '../models/product.model'
-import { Role } from '../types'
+import { MovementType, Role, TokenPayload } from '../types'
 import { ProductService } from '../services/product.service'
 import { CategoryService } from '../services/category.service'
 import { SupplierService } from '../services/suppliers.service'
 import { ServiceUtils } from '../services/utils.service'
+import { jwtPlugin } from '../setup'
+import { InventoryMovementService } from '../services/inventory-movement.service'
 
 export const productRoutes = new Elysia()
 	.use(productDto)
+	.use(jwtPlugin)
+	.derive(({ set, cookie: { auth }, jwt }) => {
+		return {
+			getCurrentUser: async () => {
+				const payload = await jwt.verify(auth.value as unknown as string)
+
+				if (!payload) {
+					set.status = 401
+					throw new Error('Unauthorized')
+				}
+
+				return payload as TokenPayload
+			}
+		}
+	})
 	.post(
 		'/product',
-		async ({ body, error, set, request }) => {
+		async ({ body, error, set, request, getCurrentUser }) => {
 			const product = await ProductService.findByName(body.name)
 
 			if (product) {
@@ -29,10 +46,18 @@ export const productRoutes = new Elysia()
 				return error('Not Found', `Fornecedor inválido`)
 			}
 
-			const result = await ProductService.create(body)
+			const payload = await getCurrentUser()
+			const resultInsertProduct = await ProductService.create(body)
+			await InventoryMovementService.create({
+				idProduct: resultInsertProduct.insertedId,
+				idUser: parseInt(payload.sub),
+				quantity: body.quantity,
+				type: MovementType.entry,
+				description: `Movimentação: ${MovementType.entry} de ${body.quantity} unidade${body.quantity > 1 ? 's' : ''} de ${body.name}`
+			})
 
 			set.status = 'OK'
-			set.headers['location'] = `${request.url}/${result.insertedId}`
+			set.headers['location'] = `${request.url}/${resultInsertProduct.insertedId}`
 
 			return `Produto: ${body.name} registrado com sucesso!`
 		},
@@ -141,7 +166,6 @@ export const productRoutes = new Elysia()
 					name: string
 					description: string
 					price: string
-					quantity: number
 					idCategory: number
 					idSuppliers: number
 				},
@@ -205,7 +229,6 @@ export const productRoutes = new Elysia()
 							name: string
 							description: string
 							price: string
-							quantity: number
 							idCategory: number
 							idSuppliers: number
 						},

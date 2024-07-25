@@ -76,11 +76,6 @@ export const productDto = new Elysia().model({
 				error: 'o preço do produto pode ter 1 a 7 numeros antes do (.), apos o (.) somente 2 numeros ex: 13.90 ou somente 13'
 			})
 		),
-		quantity: t.Optional(
-			t.Numeric({
-				minimum: 1
-			})
-		),
 		idCategory: t.Optional(
 			t.Numeric({
 				minimum: 1
@@ -120,11 +115,6 @@ export const productDto = new Elysia().model({
 						pattern: `^\\d{1,7}(\\.\\d{1,2})?$`,
 						default: 'informe o preço do produto',
 						error: 'o preço do produto pode ter 1 a 7 numeros antes do (.), apos o (.) somente 2 numeros ex: 13.90 ou somente 13'
-					})
-				),
-				quantity: t.Optional(
-					t.Numeric({
-						minimum: 1
 					})
 				),
 				idCategory: t.Optional(

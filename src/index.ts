@@ -7,6 +7,7 @@ import { userRoutes } from './controllers/user.controller'
 import { categoryRoutes } from './controllers/category.controller'
 import { supplierRoutes } from './controllers/suppliers.controller'
 import { productRoutes } from './controllers/product.controller'
+import { inventoryMovementRoutes } from './controllers/inventory-movement.controller'
 
 const app = new Elysia({ prefix: '/api/v1' })
 	.use(
@@ -50,7 +51,8 @@ const app = new Elysia({ prefix: '/api/v1' })
 			app.use(userRoutes),
 			app.use(categoryRoutes),
 			app.use(supplierRoutes),
-			app.use(productRoutes)
+			app.use(productRoutes),
+			app.use(inventoryMovementRoutes)
 		)
 	)
 	.listen(3000)
