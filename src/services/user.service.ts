@@ -123,6 +123,15 @@ export abstract class UserService {
 		return rows[0]
 	}
 
+	static async updatePassword(value: { password: string }, id: number) {
+		const rows = await db
+			.update(user)
+			.set({ ...value, updatedAt: new Date() })
+			.where(eq(user.id, id))
+			.returning({ updatedId: user.id })
+		return rows[0]
+	}
+
 	static async delete(id: number) {
 		const rows = await db.delete(user).where(eq(user.id, id)).returning({ deletedId: user.id })
 		return rows[0]

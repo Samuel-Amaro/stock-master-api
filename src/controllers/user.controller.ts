@@ -1,9 +1,48 @@
-import Elysia from 'elysia'
+import Elysia, { t } from 'elysia'
 import { UserService } from '../services/user.service'
 import { UserDTO } from '../models/user.model'
 import { PartialUser, Role, TokenPayload } from '../types'
 import { jwtPlugin } from '../setup'
 import { ServiceUtils } from '../services/utils.service'
+
+export const recoverPassword = new Elysia().put(
+	'/user/recover/password',
+	async ({ body, error }) => {
+		const userExistsByEmail = await UserService.findByEmail(body.email)
+
+		if (!userExistsByEmail) {
+			return error('Conflict', `Email inválido`)
+		}
+
+		const result = await UserService.updatePassword(
+			{
+				password: await Bun.password.hash(body.newPassword)
+			},
+			userExistsByEmail.id
+		)
+
+		return new Response(`Usuário com id: ${result.updatedId} atualizado com sucesso!`, {
+			status: 200
+		})
+	},
+	{
+		body: t.Object({
+			email: t.String({
+				format: 'email',
+				examples: 'informe um email ex: test@email.com'
+			}),
+			newPassword: t.String({
+				minLength: 8,
+				maxLength: 15,
+				format: 'regex',
+				pattern: `^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])\\S{8,15}$`,
+				examples:
+					'A senha deve ter entre 8 a 15 caracteres, Pelo menos uma letra maiúscula, Pelo menos uma letra minúscula, Pelo menos um número, Pelo menos um caractere especial (@, $, !, %, *, ?, &)',
+				error: 'A senha deve ter entre 8 a 15 caracteres, Pelo menos uma letra maiúscula, Pelo menos uma letra minúscula, Pelo menos um número, Pelo menos um caractere especial (@, $, !, %, *, ?, &)'
+			})
+		})
+	}
+)
 
 export const userRoutes = new Elysia()
 	.use(UserDTO)

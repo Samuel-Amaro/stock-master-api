@@ -3,7 +3,7 @@ import { Elysia } from 'elysia'
 import { authenticate, signOut } from './controllers/auth.controller'
 import { jwtPlugin } from './setup'
 import { TokenPayload } from './types'
-import { userRoutes } from './controllers/user.controller'
+import { recoverPassword, userRoutes } from './controllers/user.controller'
 import { categoryRoutes } from './controllers/category.controller'
 import { supplierRoutes } from './controllers/suppliers.controller'
 import { productRoutes } from './controllers/product.controller'
@@ -23,6 +23,7 @@ const app = new Elysia({ prefix: '/api/v1' })
 	)
 	.use(jwtPlugin)
 	.use(authenticate)
+	.use(recoverPassword)
 	.guard(
 		{
 			async beforeHandle({ headers, jwt, error }) {
