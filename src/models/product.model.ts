@@ -133,5 +133,8 @@ export const productDto = new Elysia().model({
 			}),
 			{ minItems: 1 }
 		)
+	}),
+	'product.delete.batch': t.Object({
+		productIds: t.Array(t.Numeric({ minimum: 1 }), { minItems: 1 })
 	})
 })

@@ -158,4 +158,12 @@ export abstract class ProductService {
 			.returning({ updatedId: product.id })
 		return rows[0]
 	}
+
+	static async delete(id: number) {
+		const rows = await db
+			.delete(product)
+			.where(eq(product.id, id))
+			.returning({ deletedId: product.id })
+		return rows[0]
+	}
 }

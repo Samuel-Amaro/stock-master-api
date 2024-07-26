@@ -263,3 +263,67 @@ export const productRoutes = new Elysia()
 			}
 		}
 	)
+	.delete(
+		'/product/:id',
+		async ({ params: { id }, error }) => {
+			const product = await ProductService.findById(id)
+
+			if (!product) {
+				return error('Not Found', 'Produto não encontrado')
+			}
+
+			const result = await ProductService.delete(id)
+
+			return new Response(`Produto com id: ${result.deletedId} deletado com sucesso!`, {
+				status: 200
+			})
+		},
+		{
+			params: 'product.params'
+		}
+	)
+	.delete(
+		'/product/batch',
+		async ({ body, error }) => {
+			if (body.productIds.length === 0) {
+				return error('Bad Request', 'Request com body inválido')
+			}
+
+			const productsFound = await Promise.all(
+				body.productIds.map((prod) => {
+					return ProductService.findById(prod)
+				})
+			)
+
+			const filteredProductsFound = productsFound
+				.filter((prod) => {
+					if (prod) return true
+					return false
+				})
+				.map((p) => {
+					return p?.id
+				})
+
+			const deletedProductIds = await Promise.all(
+				body.productIds.map((prodId) => {
+					if (filteredProductsFound.includes(prodId)) {
+						return ProductService.delete(prodId)
+					}
+				})
+			)
+
+			return {
+				message: 'produtos deletados com sucesso',
+				deletedProductIds: deletedProductIds
+					.filter((prod) => {
+						return prod ? true : false
+					})
+					.map((prod) => {
+						return prod?.deletedId
+					})
+			}
+		},
+		{
+			body: 'product.delete.batch'
+		}
+	)
